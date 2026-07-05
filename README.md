@@ -27,8 +27,7 @@ pre-fills request bodies from your actual schemas, and gives you a
 persistent split-pane terminal workspace for testing — no manual setup, 
 no collections to create.
 
-Supported: NestJS, Next.js, Express, Fastify, Hono, FastAPI, Flask, 
-Django, Gin, Echo.
+Supported: 45 frameworks across Node.js, Bun, Python, Go, Java/Kotlin, PHP, Ruby, Rust, and C#/.NET (including NestJS, Next.js, FastAPI, Express, Spring Boot, Laravel, Rails, Actix Web, ASP.NET Core, and many more).
 
 ## Links
 

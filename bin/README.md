@@ -6,7 +6,7 @@
 
 ![Go Version](https://img.shields.io/badge/Go-1.25.0-00ADD8?style=flat-square&logo=go)
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)
-![Release](https://img.shields.io/badge/Release-v1.0.0-green?style=flat-square)
+![Release](https://img.shields.io/badge/Release-v1.2.0-green?style=flat-square)
 ![Build](https://img.shields.io/badge/Build-passing-brightgreen?style=flat-square)
 
 ## The Problem
@@ -23,11 +23,17 @@ Postman and Insomnia require manual setup for every project: creating collection
 
 ## Supported Frameworks
 
-| Language          | Frameworks                                 |
-| ----------------- | ------------------------------------------ |
-| **Node.js** | NestJS, Next.js, Express*, Fastify*, Hono* |
-| **Python**  | FastAPI*, Flask*, Django*                  |
-| **Go**      | Gin*, Echo*                                |
+| Language          | Frameworks                                                                                                                        |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Node.js**       | NestJS, Next.js, Express*, Fastify*, Hono*, Koa*, AdonisJS*, Sails.js*, Restify*, Hapi.js*, Polka*, Feathers*, ts-rest*, tRPC* |
+| **Bun**           | Elysia*                                                                                                                           |
+| **Python**        | FastAPI, Flask*, Django*, Litestar*, Tornado*, aiohttp*, Falcon*, Sanic*                                                          |
+| **Go**            | Gin*, Echo*, Fiber*, Chi*, HttpRouter*, Gorilla Mux*, Go stdlib*                                                                  |
+| **Java/Kotlin**   | Spring Boot*, Quarkus*, Micronaut*                                                                                                |
+| **PHP**           | Laravel*, Slim*, Symfony*, CakePHP*                                                                                               |
+| **Ruby**          | Rails*, Sinatra*, Grape*                                                                                                          |
+| **Rust**          | Actix Web*, Axum*, Rocket*, Warp*, Poem*                                                                                          |
+| **C#/.NET**       | ASP.NET Core*                                                                                                                     |
 
 *\* pattern-implemented, less extensively tested against massive monoliths.*
 
@@ -130,7 +136,7 @@ Example `testify.json`:
 
 ## Project Status
 
-This is an actively developed personal project. The CLI engine is currently complete and stable (`v1.0.0`). The web-based UI Next.js frontend is currently in progress.
+This is an actively developed personal project. The CLI engine is currently complete and stable (`v1.2.0`). The web-based UI Next.js frontend is fully embedded and deployed!
 
 ## Contributing
 
