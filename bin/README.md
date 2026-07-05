@@ -82,8 +82,10 @@ testify start # (or ./testify start if you didn't move it to your PATH)
 
 | Command             | Description                                         |
 | ------------------- | --------------------------------------------------- |
-| `testify start`   | Start Testify in the current project                |
+| `testify start`   | Start Testify in the current project (TUI)          |
+| `testify ui`      | Launch the embedded Web Dashboard in browser        |
 | `testify scan`    | Scan project and list detected routes               |
+| `testify frameworks` | List supported frameworks and their status       |
 | `testify history` | View the last 20 test executions                    |
 | `testify add`     | Interactively add a custom route to`testify.json` |
 | `testify version` | Print the version number of Testify                 |
