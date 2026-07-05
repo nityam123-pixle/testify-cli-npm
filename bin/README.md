@@ -1,3 +1,4 @@
+
 <img src="assets/ascii-logo.svg" alt="Testify ASCII Logo" />
 
 # Testify
@@ -5,7 +6,7 @@
 **Zero-config API testing for your terminal.**
 
 ![Go Version](https://img.shields.io/badge/Go-1.25.0-00ADD8?style=flat-square&logo=go)
-![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)
+![License](<https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square>)
 ![Release](https://img.shields.io/badge/Release-v1.2.10-green?style=flat-square)
 ![Build](https://img.shields.io/badge/Build-passing-brightgreen?style=flat-square)
 
@@ -15,34 +16,47 @@ Postman and Insomnia require manual setup for every project: creating collection
 
 ## What Testify Does
 
-- Auto-detects your tech stack by reading `package.json`, `requirements.txt`, or `go.mod`
-- Recursively scans your codebase for API routes across 10+ frameworks
-- Pre-fills request bodies by following imports to find your actual Typescript DTOs and schemas
-- Persistent split-pane workspace — edit request, see response, no context switching
-- Works on monorepos, custom routes via `testify.json`, and maintains a full request history
+- **Zero Config**: Auto-detects your tech stack by reading `package.json`, `requirements.txt`, or `go.mod`
+- **Smart Scraping**: Recursively scans your codebase for API routes across 10+ frameworks and extracts DTO schemas
+- **Terminal UI (TUI)**: Persistent split-pane workspace — edit request, see response, no context switching
+- **Web Dashboard** (`testify ui`): A beautiful, modern Next.js interface with dark mode, interactive JSON editors, and polished animations
+- **Advanced Request Builder**:
+  - Fully editable API URLs
+  - Dynamic Path Parameters detection (e.g. automatically creates input fields for `:id` or `{user_id}`)
+  - Comprehensive Headers management with Autocomplete for standard HTTP headers
+  - "Use Cookie" quick-action to extract `Set-Cookie` tokens from responses instantly
+- **Edge-case Support**: Works on monorepos, custom routes via `testify.json`, and maintains a full request history
 
 ## Supported Frameworks
 
-| Language          | Frameworks                                                                                                                        |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Node.js**       | NestJS, Next.js, Express*, Fastify*, Hono*, Koa*, AdonisJS*, Sails.js*, Restify*, Hapi.js*, Polka*, Feathers*, ts-rest*, tRPC* |
-| **Bun**           | Elysia*                                                                                                                           |
-| **Python**        | FastAPI, Flask*, Django*, Litestar*, Tornado*, aiohttp*, Falcon*, Sanic*                                                          |
-| **Go**            | Gin*, Echo*, Fiber*, Chi*, HttpRouter*, Gorilla Mux*, Go stdlib*                                                                  |
-| **Java/Kotlin**   | Spring Boot*, Quarkus*, Micronaut*                                                                                                |
-| **PHP**           | Laravel*, Slim*, Symfony*, CakePHP*                                                                                               |
-| **Ruby**          | Rails*, Sinatra*, Grape*                                                                                                          |
-| **Rust**          | Actix Web*, Axum*, Rocket*, Warp*, Poem*                                                                                          |
-| **C#/.NET**       | ASP.NET Core*                                                                                                                     |
+| Language              | Frameworks                                                                                                                     |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Node.js**     | NestJS, Next.js, Express*, Fastify*, Hono*, Koa*, AdonisJS*, Sails.js*, Restify*, Hapi.js*, Polka*, Feathers*, ts-rest*, tRPC* |
+| **Bun**         | Elysia*                                                                                                                        |
+| **Python**      | FastAPI, Flask*, Django*, Litestar*, Tornado*, aiohttp*, Falcon*, Sanic*                                                       |
+| **Go**          | Gin*, Echo*, Fiber*, Chi*, HttpRouter*, Gorilla Mux*, Go stdlib*                                                               |
+| **Java/Kotlin** | Spring Boot*, Quarkus*, Micronaut*                                                                                             |
+| **PHP**         | Laravel*, Slim*, Symfony*, CakePHP*                                                                                            |
+| **Ruby**        | Rails*, Sinatra*, Grape*                                                                                                       |
+| **Rust**        | Actix Web*, Axum*, Rocket*, Warp*, Poem*                                                                                       |
+| **C#/.NET**     | ASP.NET Core*                                                                                                                  |
 
 *\* pattern-implemented, less extensively tested against massive monoliths.*
 
 ## Installation
 
+### Node Package Manager (NPM) (Recommended)
+
+You can install Testify globally using npm:
+
+```bash
+npm install -g testify-api-cli
+```
+
 ### Build from source
 
 ```bash
-git clone [REPO_URL]
+git clone https://github.com/nityam123-pixle/testify-cli.git
 cd testify-cli
 go build -o testify .
 
@@ -55,15 +69,40 @@ sudo mv testify /usr/local/bin/testify
 
 ### Homebrew
 
-```bash
-[COMING_SOON]
-```
-
-### cURL Install Script
+You can install Testify via Homebrew:
 
 ```bash
-[COMING_SOON]
+brew tap nityam123-pixle/homebrew-testify
+brew install testify-api-cli
 ```
+
+### cURL (Linux & macOS)
+
+You can install Testify with a single command — no Node or Homebrew required:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/nityam123-pixle/testify-cli/main/install.sh | bash
+```
+
+This script auto-detects your OS and CPU architecture, downloads the correct binary from the [latest GitHub release](https://github.com/nityam123-pixle/testify-cli/releases/latest), and installs it to `/usr/local/bin/testify`.
+
+### PowerShell (Windows)
+
+Open **PowerShell as Administrator** and run:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/nityam123-pixle/testify-cli/main/install.ps1 | iex
+```
+
+This script auto-detects your CPU architecture (`amd64` or `arm64`), downloads the correct `.zip` from the [latest GitHub release](https://github.com/nityam123-pixle/testify-cli/releases/latest), extracts it to `%LOCALAPPDATA%\Programs\testify`, and automatically adds it to your user `PATH`.
+
+After installation, restart your terminal and run:
+
+```powershell
+testify version
+```
+
+> **Manual download**: You can also grab a `.zip` directly from the [Releases page](https://github.com/nityam123-pixle/testify-cli/releases) and add the folder to your PATH manually.
 
 ## Quick Start
 
@@ -90,6 +129,18 @@ testify start # (or ./testify start if you didn't move it to your PATH)
 | `testify add`     | Interactively add a custom route to`testify.json` |
 | `testify version` | Print the version number of Testify                 |
 | `testify help`    | Help about any command                              |
+
+## Configuration
+
+Testify automatically infers the backend port by parsing your source code (e.g., `app.listen(3000)`). However, if you are running Testify on a remote production or staging server, you can override the base URL by injecting environment variables:
+
+```bash
+# Override the port
+PORT=5000 testify
+
+# Override the entire base URL
+TESTIFY_URL=https://<your-site-doman>.com testify start
+```
 
 ## Keyboard Shortcuts
 

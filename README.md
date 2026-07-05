@@ -1,39 +1,203 @@
-# testify-api-cli
 
-> npm distribution wrapper for [Testify](https://github.com/nityam123-pixle/testify-cli) 
-> — zero-config API testing for your terminal.
+<img src="assets/ascii-logo.svg" alt="Testify ASCII Logo" />
 
-## Install
+# Testify
+
+**Zero-config API testing for your terminal.**
+
+![Go Version](https://img.shields.io/badge/Go-1.25.0-00ADD8?style=flat-square&logo=go)
+![License](<https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square>)
+![Release](https://img.shields.io/badge/Release-v1.2.10-green?style=flat-square)
+![Build](https://img.shields.io/badge/Build-passing-brightgreen?style=flat-square)
+
+## The Problem
+
+Postman and Insomnia require manual setup for every project: creating collections, typing URLs, guessing request bodies, and constantly switching context. Testify eliminates this busywork by statically analyzing your actual source code. It reads your codebase, finds your routes, infers your validation schemas, and provides an instant TUI workspace to test them immediately.
+
+## What Testify Does
+
+- **Zero Config**: Auto-detects your tech stack by reading `package.json`, `requirements.txt`, or `go.mod`
+- **Smart Scraping**: Recursively scans your codebase for API routes across 10+ frameworks and extracts DTO schemas
+- **Terminal UI (TUI)**: Persistent split-pane workspace — edit request, see response, no context switching
+- **Web Dashboard** (`testify ui`): A beautiful, modern Next.js interface with dark mode, interactive JSON editors, and polished animations
+- **Advanced Request Builder**:
+  - Fully editable API URLs
+  - Dynamic Path Parameters detection (e.g. automatically creates input fields for `:id` or `{user_id}`)
+  - Comprehensive Headers management with Autocomplete for standard HTTP headers
+  - "Use Cookie" quick-action to extract `Set-Cookie` tokens from responses instantly
+- **Edge-case Support**: Works on monorepos, custom routes via `testify.json`, and maintains a full request history
+
+## Supported Frameworks
+
+| Language              | Frameworks                                                                                                                     |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Node.js**     | NestJS, Next.js, Express*, Fastify*, Hono*, Koa*, AdonisJS*, Sails.js*, Restify*, Hapi.js*, Polka*, Feathers*, ts-rest*, tRPC* |
+| **Bun**         | Elysia*                                                                                                                        |
+| **Python**      | FastAPI, Flask*, Django*, Litestar*, Tornado*, aiohttp*, Falcon*, Sanic*                                                       |
+| **Go**          | Gin*, Echo*, Fiber*, Chi*, HttpRouter*, Gorilla Mux*, Go stdlib*                                                               |
+| **Java/Kotlin** | Spring Boot*, Quarkus*, Micronaut*                                                                                             |
+| **PHP**         | Laravel*, Slim*, Symfony*, CakePHP*                                                                                            |
+| **Ruby**        | Rails*, Sinatra*, Grape*                                                                                                       |
+| **Rust**        | Actix Web*, Axum*, Rocket*, Warp*, Poem*                                                                                       |
+| **C#/.NET**     | ASP.NET Core*                                                                                                                  |
+
+*\* pattern-implemented, less extensively tested against massive monoliths.*
+
+## Installation
+
+### Node Package Manager (NPM) (Recommended)
+
+You can install Testify globally using npm:
 
 ```bash
 npm install -g testify-api-cli
 ```
 
-## Usage
+### Build from source
+
+```bash
+git clone https://github.com/nityam123-pixle/testify-cli.git
+cd testify-cli
+go build -o testify .
+
+# Option A: Move to your PATH for global access
+sudo mv testify /usr/local/bin/testify
+
+# Option B: Run it locally in your project folder
+./testify start
+```
+
+### Homebrew
+
+You can install Testify via Homebrew:
+
+```bash
+brew tap nityam123-pixle/homebrew-testify
+brew install testify-api-cli
+```
+
+### cURL (Linux & macOS)
+
+You can install Testify with a single command — no Node or Homebrew required:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/nityam123-pixle/testify-cli/main/install.sh | bash
+```
+
+This script auto-detects your OS and CPU architecture, downloads the correct binary from the [latest GitHub release](https://github.com/nityam123-pixle/testify-cli/releases/latest), and installs it to `/usr/local/bin/testify`.
+
+### PowerShell (Windows)
+
+Open **PowerShell as Administrator** and run:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/nityam123-pixle/testify-cli/main/install.ps1 | iex
+```
+
+This script auto-detects your CPU architecture (`amd64` or `arm64`), downloads the correct `.zip` from the [latest GitHub release](https://github.com/nityam123-pixle/testify-cli/releases/latest), extracts it to `%LOCALAPPDATA%\Programs\testify`, and automatically adds it to your user `PATH`.
+
+After installation, restart your terminal and run:
+
+```powershell
+testify version
+```
+
+> **Manual download**: You can also grab a `.zip` directly from the [Releases page](https://github.com/nityam123-pixle/testify-cli/releases) and add the folder to your PATH manually.
+
+## Quick Start
+
+Navigate to your backend project folder and run Testify:
 
 ```bash
 cd your-project
-testify start
+testify start # (or ./testify start if you didn't move it to your PATH)
 ```
 
-This package downloads the correct pre-built Testify binary for your 
-platform (macOS/Linux/Windows, x64/arm64) from GitHub Releases automatically 
-on install. No Go compiler required.
+1. **Stack Detection**: Testify scans for `package.json`, `go.mod`, etc., to identify your framework and language.
+2. **Route Scraping**: It recursively searches your source code, building an AST to extract endpoints and DTO schemas.
+3. **Workspace**: An interactive TUI opens, pre-filled with your API routes and ready for you to send requests.
 
-## What is Testify?
+## Usage
 
-Testify detects your tech stack, scans your codebase for API routes, 
-pre-fills request bodies from your actual schemas, and gives you a 
-persistent split-pane terminal workspace for testing — no manual setup, 
-no collections to create.
+| Command             | Description                                         |
+| ------------------- | --------------------------------------------------- |
+| `testify start`   | Start Testify in the current project (TUI)          |
+| `testify ui`      | Launch the embedded Web Dashboard in browser        |
+| `testify scan`    | Scan project and list detected routes               |
+| `testify frameworks` | List supported frameworks and their status       |
+| `testify history` | View the last 20 test executions                    |
+| `testify add`     | Interactively add a custom route to`testify.json` |
+| `testify version` | Print the version number of Testify                 |
+| `testify help`    | Help about any command                              |
 
-Supported: 45 frameworks across Node.js, Bun, Python, Go, Java/Kotlin, PHP, Ruby, Rust, and C#/.NET (including NestJS, Next.js, FastAPI, Express, Spring Boot, Laravel, Rails, Actix Web, ASP.NET Core, and many more).
+## Configuration
 
-## Links
+Testify automatically infers the backend port by parsing your source code (e.g., `app.listen(3000)`). However, if you are running Testify on a remote production or staging server, you can override the base URL by injecting environment variables:
 
-- Main repo: https://github.com/nityam123-pixle/testify-cli
-- Issues: https://github.com/nityam123-pixle/testify-cli/issues
+```bash
+# Override the port
+PORT=5000 testify
+
+# Override the entire base URL
+TESTIFY_URL=https://<your-site-doman>.com testify start
+```
+
+## Keyboard Shortcuts
+
+| Key                | Action                                              |
+| ------------------ | --------------------------------------------------- |
+| `/`              | Open the Route Search Command Palette               |
+| `Tab`            | Switch focus between Request Pane and Response Pane |
+| `Ctrl+S`         | Send the current request                            |
+| `1`              | View Response Body JSON                             |
+| `2`              | View Response Headers                               |
+| `3`              | View Raw HTTP Response                              |
+| `c`              | Copy the active response view to clipboard          |
+| `r`              | Clear the response pane                             |
+| `Up` / `k`     | Scroll up the response pane                         |
+| `Down` / `j`   | Scroll down the response pane                       |
+| `PageUp`         | Fast scroll up                                      |
+| `PageDown`       | Fast scroll down                                    |
+| `Home`           | Scroll to top                                       |
+| `Esc`            | Close route palette or defocus input                |
+| `Ctrl+C` / `q` | Quit Testify                                        |
+
+## Custom Routes (`testify.json`)
+
+Sometimes routes are dynamically mounted by third-party libraries (like Better Auth) and cannot be statically detected in your source code. You can manually define these routes in a `testify.json` file in your project root.
+
+You can add them interactively using the CLI:
+
+```bash
+testify add
+```
+
+Example `testify.json`:
+
+```json
+{
+  "custom_routes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/sign-in/email",
+      "description": "Better Auth - Email Sign In",
+      "body_template": "{\n  \"email\": \"\",\n  \"password\": \"\"\n}"
+    }
+  ]
+}
+```
+
+## Project Status
+
+This is an actively developed personal project. The CLI engine is currently complete and stable (`v1.2.10`). The web-based UI Next.js frontend is fully embedded and deployed!
+
+## Contributing
+
+Issues and PRs are welcome! Please open an issue to discuss your ideas before submitting a PR to ensure it aligns with the project direction.
 
 ## License
 
-Apache-2.0
+This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.
+
+> [!WARNING]
+> This is a proprietary open-source project. You are welcome to view, learn from, and contribute to the code. However, you may not copy, rebrand, or re-distribute this project or its core engine as your own product.
