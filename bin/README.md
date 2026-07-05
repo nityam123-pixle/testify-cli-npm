@@ -6,7 +6,7 @@
 
 ![Go Version](https://img.shields.io/badge/Go-1.25.0-00ADD8?style=flat-square&logo=go)
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)
-![Release](https://img.shields.io/badge/Release-v1.2.9-green?style=flat-square)
+![Release](https://img.shields.io/badge/Release-v1.2.10-green?style=flat-square)
 ![Build](https://img.shields.io/badge/Build-passing-brightgreen?style=flat-square)
 
 ## The Problem
@@ -138,7 +138,7 @@ Example `testify.json`:
 
 ## Project Status
 
-This is an actively developed personal project. The CLI engine is currently complete and stable (`v1.2.9`). The web-based UI Next.js frontend is fully embedded and deployed!
+This is an actively developed personal project. The CLI engine is currently complete and stable (`v1.2.10`). The web-based UI Next.js frontend is fully embedded and deployed!
 
 ## Contributing
 
