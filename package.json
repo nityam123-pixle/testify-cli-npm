@@ -1,6 +1,6 @@
 {
     "name": "testify-api-cli",
-    "version": "1.2.11",
+    "version": "1.2.12",
     "description": "Zero-config API testing for your terminal",
     "homepage": "https://github.com/nityam123-pixle/testify-cli",
     "repository": {
